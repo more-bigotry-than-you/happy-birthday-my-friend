@@ -1,6 +1,12 @@
-# 巫师桌宠 bundle patch：把桌宠行并入 dsh 的 web 插件名册。
-# 本包自带完整的桌宠运行时（lib/）与宠物素材（assets/wizard/），以 pet 服务名挂载，
-# 因此同一个 profile 内不要再启用其它桌宠插件（例如 dsh-web-all 展开出的 web-ui-pet 行）。
+# dsh-wizard-pet 的加载补丁。
+#
+# 1) 先关掉可能已存在的「上游桌宠」行（DSH Web 全家桶 @linxin666/dsh-web-all 会插入
+#    id 为 web-ui-pet 的 @linxin666/dsh-pet）。两只桌宠都占用同一个 pet 服务名，
+#    共存时后注册的会接管，容易让人以为装坏了，所以这里直接禁用上游那只。
+#    profile 里没有这一行时，这条覆盖会被忽略，不会报错。
+# 2) 再插入本插件。
+- id: web-ui-pet
+  disabled: true
 - insert:
     - id: wizard-pet
       name: 'dsh-wizard-pet'
