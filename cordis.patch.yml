@@ -4,3 +4,6 @@
 - insert:
     - id: wizard-pet
       name: 'dsh-wizard-pet'
+      config:
+        # 上游自带的状态装饰是鲸鱼主题，与巫师不搭，关掉
+        decorationEnabled: false
