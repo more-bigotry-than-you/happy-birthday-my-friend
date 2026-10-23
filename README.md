@@ -30,9 +30,12 @@
 
 ## 它长这样
 
-![巫师桌宠](assets/wizard/spritesheet.png)
+| 豆包 AI 画的 Q 版（默认） | 3D 动作版（可切换） |
+| --- | --- |
+| ![Q 版](assets/wizard/spritesheet.png) | ![3D 版](assets/wizard/previews/spritesheet-q.png) |
 
-上面是它的完整动作图集（八列九行，依次是：待机 / 向右跑 / 向左跑 / 挥手 / 跳跃 / 沮丧 / 等待 / 干活 / 审阅）。
+两套图集都是八列九行、每格 240×260，行序相同：
+待机 / 向右跑 / 向左跑 / 挥手 / 跳跃 / 沮丧 / 等待 / 干活 / 审阅。
 
 ## 装上它
 
@@ -47,6 +50,20 @@ dsh plugin --profile <profile> add github:more-bigotry-than-you/happy-birthday-m
 这条命令会自动把本包装进 profile 的插件层（包声明了 `dsh.bundle.patch`，dsh 安装后会自行登记，
 不需要手动改 `package.json`）。装完后**重启 dsh web**（宠物名册在启动时构建一次），巫师就会出现。
 
+### 想让它能换形象，再打一个补丁
+
+上游桌宠的渲染器是编译产物，切换按钮得单独打补丁（**不打也能用**，只是没有「形象」按钮，
+一直显示默认的 Q 版）：
+
+```powershell
+git clone https://github.com/more-bigotry-than-you/happy-birthday-my-friend
+node happy-birthday-my-friend/tools/apply-pet-patch.mjs
+```
+
+脚本会自动定位 `$DSH_HOME/profiles/desktop/node_modules/@linxin666/dsh-pet/lib/client.js`
+（也可以把路径作为第一个参数传进去），首次运行备份成 `client.js.bak-orig`，已经打过就跳过。
+打完 **Ctrl+Shift+R** 强刷页面，HUD 上就多出一颗「形象 Q / 形象 3D」，点一下换着看。
+
 ## 怎么玩
 
 | 面板按钮 | 作用 |
@@ -54,6 +71,7 @@ dsh plugin --profile <profile> add github:more-bigotry-than-you/happy-birthday-m
 | 喂食 | 花掉 1 条小鱼干，亲密度 +4（有 30 秒冷却） |
 | 改名 | 给它换个名字 |
 | 隐藏 | 把它收起来，随时能再召唤 |
+| 形象 | 在 Q 版与 3D 动作版之间切换，选择会记住 |
 
 它还会默认显示一行状态：**名字 · 亲密度等级 · 点数 · 小鱼干存量**。
 直接摸它（点一下）也能涨亲密度，10 秒冷却。
@@ -94,8 +112,15 @@ dsh plugin --profile <profile> add github:more-bigotry-than-you/happy-birthday-m
 
 ## 关于素材
 
-角色形象取材自一份玩家自摄的游戏截图，经抠像后重制为剪纸分层动画；
-仓库内**不包含**任何游戏原始资源文件。本作品为免费非商业同人作品，请勿用于售卖。
+两套形象是同一只角色的两种画法：
+
+- **Q 版（默认）**：豆包 AI 画的九张动作立绘（挥手 / 待机 / 抱臂 / 左跑 / 右跑 / 施法 / 跳起 / 眨眼 / 坐下），
+  抠像后按呼吸、弹跳、倾斜这些曲线程序化生成 57 帧，所以每一帧都有一点微小的呼吸感。
+- **3D 动作版**：更早的时候用角色模型在 Blender 里离线渲染的 57 帧，
+  再拿二维骨架重映射到 Q 版的四头身比例——动作更接近真人，脸是模型的脸。
+
+仓库内**不包含**任何游戏原始资源文件，两套图集都是重制后的成品。
+本作品为免费非商业同人作品，请勿用于售卖。
 
 素材（`assets/wizard/`）以 CC BY-NC 4.0 授权；代码部分沿用 Apache-2.0。
 

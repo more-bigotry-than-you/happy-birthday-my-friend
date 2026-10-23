@@ -5,14 +5,14 @@
   "displayName": "巫师",
   "author": "dsh-wizard-pet",
   "version": "1.0.0",
-  "description": "一位裹着深色斗篷的小巫师：尖顶帽、白色面具，身后浮着橙色的光翼。你写代码时它安静站着，写完一段会蹦一下，出错时会垂下头。",
+  "description": "一位披着黑斗篷的小巫师：尖顶黑帽、白发、黑面具上的红纹围巾、白球鞋。你写代码时它安静站着，写完一段会蹦一下，出错时会垂下头。",
   "license": "CC-BY-NC-4.0",
   "renderer": "sprite2d",
   "sprite2d": {
     "spritesheetPath": "spritesheet.png",
     "cell": {
-      "width": 192,
-      "height": 208
+      "width": 240,
+      "height": 260
     },
     "columns": 8,
     "atlasRows": 9,
